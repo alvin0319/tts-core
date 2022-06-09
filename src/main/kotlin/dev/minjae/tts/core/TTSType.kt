@@ -4,6 +4,7 @@ import okhttp3.FormBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.net.URLEncoder
+import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 
 enum class TTSType(private val endpoint: String) {
@@ -32,7 +33,7 @@ enum class TTSType(private val endpoint: String) {
                         .build()
                 }
                 GOOGLE -> {
-                    val encodedString = URLEncoder.encode(text, StandardCharsets.UTF_8)
+                    val encodedString = URLEncoder.encode(text, Charset.forName("UTF-8"))
                     Request.Builder()
                         .header(
                             "User-Agent",
