@@ -32,19 +32,14 @@ enum class TTSType(private val endpoint: String) {
                         .build()
                 }
                 GOOGLE -> {
+                    val encodedString = URLEncoder.encode(text, StandardCharsets.UTF_8)
                     Request.Builder()
                         .header(
                             "User-Agent",
                             "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2"
                         )
                         .url(
-                            endpoint +
-                                "?ie=UTF-8&client=tw-ob&q=${
-                                URLEncoder.encode(
-                                    text,
-                                    StandardCharsets.UTF_8
-                                )
-                                }&tl=${language.googleCode}"
+                            endpoint + "?ie=UTF-8&client=tw-ob&q=$encodedString&tl=${language.googleCode}"
 
                         )
                         .get()
